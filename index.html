@@ -1,211 +1,88 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DanielH131COL</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Sitio personal de DanielH131COL, Software Developer y Tech Enthusiast."/>
+  <title>DanielH131COL - Software Developer</title>
+
+  <!-- Tailwind -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- CSS personalizado -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300 flex items-center justify-center min-h-screen bg-pattern" style="font-family: 'Open Sans', sans-serif;">
-  <div class="container mx-auto p-4 w-full max-w-4xl">
-    <header class="header text-white text-center relative">
-      <h1 class="header-title fade-in-up">
-        <span class="portfolio-box">DanielH131COL</span>
-      </h1>
-      <div class="theme-toggle">
-        <input type="checkbox" id="dark-mode-toggle" class="hidden">
-        <label for="dark-mode-toggle" class="toggle-label"></label>
+<body class="transition-colors duration-300" data-theme="dark">
+
+  <!-- Header -->
+  <header class="bg-gray-800 text-gray-100 py-4 shadow-lg animate-fadeInDown">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold"><i class="fas fa-code mr-2 text-gray-400"></i>DanielH131COL</h1>
+      <div class="flex space-x-2">
+        <button id="theme-toggle" class="bg-gray-700 text-gray-100 p-2 rounded-full hover:bg-gray-600 transition-colors" title="Cambiar Modo">
+          <i id="theme-icon" class="fas fa-sun"></i>
+        </button>
+        <button id="play-sound" class="bg-gray-700 text-gray-100 p-2 rounded-full hover:bg-gray-600 transition-colors" title="Reproducir Sonido">
+          <i class="fas fa-play"></i>
+        </button>
       </div>
-      <a href="#projects" class="explore-btn">Explorar Más</a>
-    </header>
+    </div>
+  </header>
 
-    <section class="section-container fade-in-up">
-      <h2 class="section-title">
-        Sobre Mí
-      </h2>
-      <p class="section-text">
-        I'm a 23-year-old Colombian developer specializing in Java.
-        I'm passionate about creating efficient and scalable solutions that make a difference.
-      </p>
-    </section>
+  <!-- Audios -->
+  <audio id="background-sound" src="assets/sounds/background.mp3" loop></audio>
+  <audio id="click-sound" src="assets/sounds/click.mp3"></audio>
 
-    <section class="section-container fade-in-up">
-      <h2 class="section-title">
-        Habilidades
-      </h2>
-      <div class="skills-grid">
-        <div class="skill-item hover-scale"><i class="fab fa-java"></i> Java</div>
-        <div class="skill-item hover-scale"><i class="fab fa-python"></i> Python</div>
-        <div class="skill-item hover-scale"><i class="fab fa-android"></i> Kotlin</div>
-        <div class="skill-item hover-scale"><i class="fas fa-database"></i> MySQL</div>
-        <div class="skill-item hover-scale"><i class="fab fa-node-js"></i> NodeJS</div>
-        <div class="skill-item hover-scale"><i class="fab fa-js"></i> JavaScript</div>
-        <div class="skill-item hover-scale"><i class="fab fa-discord"></i> DiscordJS</div>
-        <div class="skill-item hover-scale"><i class="fab fa-git-alt"></i> Git</div>
-        <div class="skill-item hover-scale"><i class="fas fa-code"></i> Visual Studio Code</div>
-        <div class="skill-item hover-scale"><i class="fab fa-github"></i> GitHub</div>
-        <div class="skill-item hover-scale"><i class="fab fa-ubuntu"></i> Ubuntu</div>
-      </div>
-    </section>
+  <!-- Sobre mí -->
+  <section class="container mx-auto px-4 py-8 bg-gray-800 rounded-lg shadow-md mt-4 animate-slideInLeft">
+    <h2 class="text-3xl font-semibold mb-4"><i class="fas fa-user mr-2 text-gray-400"></i>Sobre mí</h2>
+    <p class="text-lg" id="about-text"></p>
+  </section>
 
-    <section class="section-container fade-in-up" id="projects">
-      <h2 class="section-title">
-        Proyectos
-      </h2>
-      <div class="carousel-container">
-        <button class="carousel-btn prev"><i class="fas fa-chevron-left"></i></button>
-        <div class="carousel" id="github-projects"></div>
-        <button class="carousel-btn next"><i class="fas fa-chevron-right"></i></button>
-        <div class="carousel-progress"></div>
-      </div>
-    </section>
+  <!-- Habilidades -->
+  <section class="container mx-auto px-4 py-8 bg-gray-800 rounded-lg shadow-md mt-4 animate-zoomIn">
+    <h2 class="text-3xl font-semibold mb-4"><i class="fas fa-tools mr-2 text-gray-400"></i>Habilidades</h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="skills-container"></div>
+  </section>
 
-    <footer class="footer text-white text-center">
-      <p>&copy 2025 DanielH131COL Development</p>
-    </footer>
+  <!-- Proyectos -->
+  <section class="container mx-auto px-4 py-8 bg-gray-800 rounded-lg shadow-md mt-4 animate-slideInRight">
+    <h2 class="text-3xl font-semibold mb-4"><i class="fas fa-project-diagram mr-2 text-gray-400"></i>Proyectos</h2>
+    <div class="carousel relative overflow-hidden bg-gray-900 rounded-lg shadow-inner">
+      <div class="carousel-inner flex gap-3 will-change-transform animate-scrollRight" id="carousel-inner"></div>
+    </div>
+  </section>
+
+  <!-- Botón de contacto -->
+  <button id="contact-btn" class="fixed bottom-4 right-4 bg-blue-600 text-gray-100 px-5 py-2 font-medium rounded-full shadow-lg z-50 transition-transform hover:scale-105">
+    <span class="relative z-10 flex items-center gap-2"><i class="fas fa-envelope"></i>Contacto</span>
+  </button>
+
+  <!-- Modal de contacto -->
+  <div id="contact-modal" class="fixed inset-0 hidden items-center justify-center z-50 contact-glow">
+    <div class="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-xl"></div>
+    <div class="relative z-10 bg-gray-800 p-6 rounded-lg shadow-lg max-w-md w-full mx-4 animate-zoomIn">
+      <button id="close-modal" class="absolute top-2 right-2 text-gray-400 hover:text-gray-200 text-xl">&times;</button>
+      <h2 class="text-2xl font-semibold mb-4 text-gray-100">Contacto</h2>
+      <p class="text-sm mb-4 text-gray-400" id="discord-info"></p>
+      <form id="contact-form" class="space-y-4">
+        <input type="text" id="name" placeholder="Nombre" class="w-full p-2 bg-gray-700 border border-gray-600 rounded text-gray-100" required>
+        <input type="email" id="email" placeholder="Email" class="w-full p-2 bg-gray-700 border border-gray-600 rounded text-gray-100" required>
+        <textarea id="message" placeholder="Mensaje" class="w-full p-2 bg-gray-700 border border-gray-600 rounded text-gray-100 h-32" required></textarea>
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500 transition-colors flex items-center"><i class="fas fa-paper-plane mr-2"></i>Enviar</button>
+      </form>
+    </div>
   </div>
-  <canvas id="particle-canvas"></canvas>
 
-  <script>
-    const toggle = document.getElementById('dark-mode-toggle');
-    const body = document.body;
-    const carousel = document.querySelector('.carousel');
-    const prevBtn = document.querySelector('.prev');
-    const nextBtn = document.querySelector('.next');
-    const progress = document.querySelector('.carousel-progress');
-    const githubProjects = document.getElementById('github-projects');
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-center py-4 mt-8 shadow-lg animate-fadeIn">
+    <p id="footer-text"></p>
+  </footer>
 
-    toggle.addEventListener('change', () => {
-      body.classList.toggle('dark');
-      localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
-    });
-
-    // Cargar tema guardado
-    if (localStorage.getItem('theme') === 'dark') {
-      body.classList.add('dark');
-      toggle.checked = true;
-    }
-
-    // Carrusel
-    let currentIndex = 0;
-    const cardWidth = 300;
-    const visibleCards = 1;
-    let autoSlideInterval;
-
-    function updateCarousel() {
-      const offset = -currentIndex * cardWidth;
-      carousel.style.transform = `translateX(${offset}px)`;
-      progress.style.width = `${((currentIndex + 1) / (carousel.children.length - visibleCards + 1)) * 100}%`;
-    }
-
-    function startAutoSlide() {
-      autoSlideInterval = setInterval(() => {
-        if (currentIndex < carousel.children.length - visibleCards) {
-          currentIndex++;
-        } else {
-          currentIndex = 0;
-        }
-        updateCarousel();
-      }, 5000);
-    }
-
-    function stopAutoSlide() {
-      clearInterval(autoSlideInterval);
-    }
-
-    prevBtn.addEventListener('click', () => {
-      stopAutoSlide();
-      if (currentIndex > 0) currentIndex--;
-      updateCarousel();
-      startAutoSlide();
-    });
-
-    nextBtn.addEventListener('click', () => {
-      stopAutoSlide();
-      if (currentIndex < carousel.children.length - visibleCards) currentIndex++;
-      updateCarousel();
-      startAutoSlide();
-    });
-
-    carousel.addEventListener('mouseover', stopAutoSlide);
-    carousel.addEventListener('mouseout', startAutoSlide);
-    startAutoSlide();
-
-    // Partículas
-    const canvas = document.getElementById('particle-canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const particlesArray = [];
-    const numberOfParticles = 50;
-
-    class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 3 + 1;
-        this.speedX = Math.random() * 2 - 1;
-        this.speedY = Math.random() * 2 - 1;
-      }
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
-        if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
-      }
-      draw() {
-        ctx.fillStyle = body.classList.contains('dark') ? '#93c5fd' : '#3b82f6';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-
-    function init() {
-      for (let i = 0; i < numberOfParticles; i++) {
-        particlesArray.push(new Particle());
-      }
-    }
-
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (let i = 0; i < particlesArray.length; i++) {
-        particlesArray[i].update();
-        particlesArray[i].draw();
-      }
-      requestAnimationFrame(animate);
-    }
-
-    init();
-    animate();
-
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    });
-
-    // Cargar proyectos de GitHub
-    const username = 'DanielH131COL';
-    fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=20`)
-      .then(response => response.json())
-      .then(repos => {
-        const publicRepos = repos.filter(repo => !repo.fork);
-        publicRepos.forEach(repo => {
-          const projectCard = document.createElement('div');
-          projectCard.className = 'project-card hover-scale';
-          projectCard.innerHTML = `
-            <h3 class="project-title">${repo.name}</h3>
-            <p class="project-text">${repo.description || 'Proyecto sin descripción'}</p>
-            <a href="${repo.html_url}" class="project-link" target="_blank">Ver Proyecto</a>
-          `;
-          githubProjects.appendChild(projectCard);
-        });
-        updateCarousel(); // Actualizar carrusel después de cargar proyectos
-      })
-      .catch(error => console.error('Error al cargar proyectos:', error));
-  </script>
+  <!-- Script principal -->
+  <script src="js/script.js"></script>
 </body>
 </html>

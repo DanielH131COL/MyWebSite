@@ -21,7 +21,7 @@ const profileData = {
         { title: 'Bunetix', icon: 'fas fa-server', description: 'Totally free Proxy Core.', url: 'https://github.com/DanielH131COL/Bunetix', public: true, stars: 0 },
         { title: 'DanielH131COL', icon: 'fas fa-user', description: 'No description provided.', url: 'https://github.com/DanielH131COL/DanielH131COL', public: true, stars: 0 },
         { title: 'FreeRank', icon: 'fas fa-star', description: 'Easy is a freerank, that\'s all hehe.', url: 'https://github.com/DanielH131COL/FreeRank', public: true, stars: 0 },
-        { title: 'Game1', icon: 'fas fa-gamepad', description: 'It\'s my first game inspired a bit by aim themes.', url: 'https://github.com/DanielH131COL/Game1', public: true, stars: 0 },
+        { title: 'Game', icon: 'fas fa-gamepad', description: 'It\'s my first game inspired a bit by aim themes.', url: 'https://github.com/DanielH131COL/Game1', public: true, stars: 0 },
         { title: 'MyWebSite', icon: 'fas fa-globe', description: 'Personal website and playground.', url: 'https://github.com/DanielH131COL/MyWebSite', public: true, stars: 0 }
     ]
 };
