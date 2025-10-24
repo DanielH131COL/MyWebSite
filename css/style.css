@@ -1,0 +1,246 @@
+/* ========== Reset & base ========== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    line-height: 1.5;
+    background-color: #0b1220;
+    color: #edf2f7;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Theme */
+body[data-theme="dark"] {
+    background-color: #0f172a;
+    color: #f1f5f9;
+}
+
+body[data-theme="light"] {
+    background-color: #f8fafc;
+    color: #0b1220;
+}
+
+body[data-theme="light"] header,
+body[data-theme="light"] section,
+body[data-theme="light"] footer {
+    background-color: #e2e8f0;
+}
+
+body[data-theme="light"] .bg-gray-800 {
+    background-color: #e2e8f0 !important;
+}
+
+body[data-theme="light"] .bg-gray-900 {
+    background-color: #cbd5e1 !important;
+}
+
+body[data-theme="light"] .bg-gray-700 {
+    background-color: #d1d5db !important;
+}
+
+body[data-theme="light"] .bg-blue-600 {
+    background-color: #2563eb !important;
+}
+
+body[data-theme="light"] .bg-blue-600:hover {
+    background-color: #1d4ed8 !important;
+}
+
+body[data-theme="light"] .text-gray-100 {
+    color: #1f2937 !important;
+}
+
+body[data-theme="light"] .text-gray-400 {
+    color: #4b5563 !important;
+}
+
+body[data-theme="light"] .text-blue-400 {
+    color: #2563eb !important;
+}
+
+body[data-theme="light"] .border-gray-600 {
+    border-color: #9ca3af !important;
+}
+
+body[data-theme="light"] .border-gray-700 {
+    border-color: #9ca3af !important;
+}
+
+body[data-theme="light"] .project-card {
+    background-color: #d1d5db !important;
+    color: #1f2937 !important;
+}
+
+body[data-theme="light"] .project-card:hover {
+    background-color: #cbd5e1 !important;
+}
+
+body[data-theme="light"] .project-card .text-gray-400 {
+    color: #4b5563 !important;
+}
+
+body[data-theme="light"] #contact-modal .bg-black {
+    background-color: #6b7280 !important;
+}
+
+/* ========== Animaciones globales ========== */
+.animate-fadeInDown {
+    animation: fadeInDown 0.9s ease-out both;
+}
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-18px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slideInLeft {
+    animation: slideInLeft 0.9s ease-out both;
+}
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-slideInRight {
+    animation: slideInRight 0.9s ease-out both;
+}
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-zoomIn {
+    animation: zoomIn 0.9s ease-out both;
+}
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* ========== Animación de borde de color (Contact Modal y Habilidades) ========== */
+.contact-glow > .relative,
+.skill-button {
+    border: 2px solid transparent;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-glow > .relative::before,
+.skill-button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    padding: 2px;
+    background: linear-gradient(
+        135deg,
+        #E34F26 0%,    /* Java */
+        #007396 12.5%, /* Kotlin */
+        #777BB4 25%,   /* PHP */
+        #4479A1 37.5%, /* MySQL */
+        #00A300 50%,   /* Unity, Minecraft */
+        #00A4EF 62.5%, /* Discord Bots */
+        #F05032 75%,   /* Git */
+        #888888 87.5%, /* Linux */
+        #E34F26 100%   /* Loop back to Java */
+    );
+    background-size: 400% 400%;
+    animation: moveGradient 8s linear infinite;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+}
+
+/* Fallback for browsers without mask-composite support */
+@supports not (mask-composite: exclude) {
+    .contact-glow > .relative::before,
+    .skill-button::before {
+        border: 2px solid #E34F26;
+        background: none;
+        box-shadow: 0 0 8px #E34F26;
+    }
+}
+
+@keyframes moveGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ========== Habilidades ========== */
+.skill-button {
+    cursor: pointer;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    background: rgba(255,255,255,0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.skill-button i {
+    font-size: 1.75rem;
+    line-height: 1;
+}
+
+.skill-button:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 20px rgba(227, 79, 38, 0.5); /* Java color as default glow */
+}
+
+/* ========== Proyectos ========== */
+.carousel-inner {
+    animation: scrollRight 20s linear infinite;
+    transition: transform 0.25s ease;
+}
+
+@keyframes scrollRight {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.project-card {
+    position: relative;
+    background: #111;
+    border-radius: 15px;
+    overflow: hidden;
+    width: 160px;
+    height: 200px;
+    box-shadow: 0 0 15px rgba(251, 133, 0, 0.2);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.project-card:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 25px rgba(255, 183, 3, 0.5);
+}
+
+.project-card h3 {
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+
+.project-card p {
+    font-size: 0.7rem;
+    line-height: 1.3;
+    flex-grow: 1;
+}
+
+.project-card .stars {
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
