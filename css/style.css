@@ -1,246 +1,225 @@
-/* ========== Reset & base ========== */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+/* ==================================================
+   VARIABLES DE TEMA
+   ================================================== */
+:root {
+  --bg-primary: #0b1220;          /* dark */
+  --color-accent: #E34F26;
+  --color-blue:   #2563eb;
+  --text-primary: #edf2f7;
+}
+[data-theme="light"] {
+  --bg-primary: #f8fafc;
+  --text-primary: #0b1220;
 }
 
+/* ==================================================
+   BASE
+   ================================================== */
+html { scroll-behavior: smooth; }
 body {
-    font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    line-height: 1.5;
-    background-color: #0b1220;
-    color: #edf2f7;
-    transition: background-color 0.25s ease, color 0.25s ease;
+  font-family: var(--font-sans);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color .25s ease, color .25s ease;
 }
 
-/* Theme */
-body[data-theme="dark"] {
-    background-color: #0f172a;
-    color: #f1f5f9;
-}
+/* ==================================================
+   HEADER (sticky + shrink)
+   ================================================== */
+#site-header { height:5rem; transition:height .3s ease, background .3s ease; }
+#site-header.header-scrolled { height:4rem; }
 
-body[data-theme="light"] {
-    background-color: #f8fafc;
-    color: #0b1220;
+/* ==================================================
+   HERO (gradient + typewriter)
+   ================================================== */
+#hero .bg-gradient-to-br {
+  background: linear-gradient(135deg, var(--bg-primary), var(--color-accent));
+  animation: heroGradient 12s ease infinite;
 }
+@keyframes heroGradient {
+  0%   { background-position:0% 50%; }
+  50%  { background-position:100% 50%; }
+  100% { background-position:0% 50%; }
+}
+#typewriter {
+  border-right:.15rem solid #fff;
+  animation: blink .7s steps(1) infinite;
+}
+@keyframes blink { 0%,100%{border-color:transparent;} 50%{border-color:#fff;} }
 
-body[data-theme="light"] header,
-body[data-theme="light"] section,
-body[data-theme="light"] footer {
-    background-color: #e2e8f0;
+/* ==================================================
+   SCROLL REVEAL (IntersectionObserver)
+   ================================================== */
+.animate-reveal {
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity .6s ease, transform .6s ease;
 }
+.animate-reveal.visible { opacity:1; transform:translateY(0); }
 
-body[data-theme="light"] .bg-gray-800 {
-    background-color: #e2e8f0 !important;
-}
-
-body[data-theme="light"] .bg-gray-900 {
-    background-color: #cbd5e1 !important;
-}
-
-body[data-theme="light"] .bg-gray-700 {
-    background-color: #d1d5db !important;
-}
-
-body[data-theme="light"] .bg-blue-600 {
-    background-color: #2563eb !important;
-}
-
-body[data-theme="light"] .bg-blue-600:hover {
-    background-color: #1d4ed8 !important;
-}
-
-body[data-theme="light"] .text-gray-100 {
-    color: #1f2937 !important;
-}
-
-body[data-theme="light"] .text-gray-400 {
-    color: #4b5563 !important;
-}
-
-body[data-theme="light"] .text-blue-400 {
-    color: #2563eb !important;
-}
-
-body[data-theme="light"] .border-gray-600 {
-    border-color: #9ca3af !important;
-}
-
-body[data-theme="light"] .border-gray-700 {
-    border-color: #9ca3af !important;
-}
-
-body[data-theme="light"] .project-card {
-    background-color: #d1d5db !important;
-    color: #1f2937 !important;
-}
-
-body[data-theme="light"] .project-card:hover {
-    background-color: #cbd5e1 !important;
-}
-
-body[data-theme="light"] .project-card .text-gray-400 {
-    color: #4b5563 !important;
-}
-
-body[data-theme="light"] #contact-modal .bg-black {
-    background-color: #6b7280 !important;
-}
-
-/* ========== Animaciones globales ========== */
-.animate-fadeInDown {
-    animation: fadeInDown 0.9s ease-out both;
-}
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-18px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.animate-slideInLeft {
-    animation: slideInLeft 0.9s ease-out both;
-}
-@keyframes slideInLeft {
-    from { opacity: 0; transform: translateX(-30px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-.animate-slideInRight {
-    animation: slideInRight 0.9s ease-out both;
-}
-@keyframes slideInRight {
-    from { opacity: 0; transform: translateX(30px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-.animate-zoomIn {
-    animation: zoomIn 0.9s ease-out both;
-}
-@keyframes zoomIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
-}
-
-/* ========== Animación de borde de color (Contact Modal y Habilidades) ========== */
-.contact-glow > .relative,
+/* ==================================================
+   SKILL CARD
+   ================================================== */
 .skill-button {
-    border: 2px solid transparent;
-    border-radius: 8px;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor:pointer;
+  padding:1rem;
+  border-radius:.75rem;
+  background:rgba(255,255,255,.04);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:.5rem;
+  border:2px solid transparent;
+  position:relative;
+  overflow:hidden;
+  transition:transform .3s ease, box-shadow .3s ease;
+  perspective:500px;
 }
-
-.contact-glow > .relative::before,
+.skill-button:hover {
+  transform:rotateX(10deg) rotateY(10deg) scale(1.06);
+  box-shadow:0 0 20px rgba(227,79,38,.5);
+}
 .skill-button::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 8px;
-    padding: 2px;
-    background: linear-gradient(
-        135deg,
-        #E34F26 0%,    /* Java */
-        #007396 12.5%, /* Kotlin */
-        #777BB4 25%,   /* PHP */
-        #4479A1 37.5%, /* MySQL */
-        #00A300 50%,   /* Unity, Minecraft */
-        #00A4EF 62.5%, /* Discord Bots */
-        #F05032 75%,   /* Git */
-        #888888 87.5%, /* Linux */
-        #E34F26 100%   /* Loop back to Java */
-    );
-    background-size: 400% 400%;
-    animation: moveGradient 8s linear infinite;
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-            mask-composite: exclude;
-    pointer-events: none;
-}
-
-/* Fallback for browsers without mask-composite support */
-@supports not (mask-composite: exclude) {
-    .contact-glow > .relative::before,
-    .skill-button::before {
-        border: 2px solid #E34F26;
-        background: none;
-        box-shadow: 0 0 8px #E34F26;
-    }
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:8px;
+  padding:2px;
+  background:linear-gradient(
+    135deg,
+    #E34F26 0%,#007396 12.5%,#777BB4 25%,#4479A1 37.5%,
+    #00A300 50%,#00A4EF 62.5%,#F05032 75%,#888888 87.5%,#E34F26 100%
+  );
+  background-size:400% 400%;
+  animation:moveGradient 8s linear infinite;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+          mask-composite:exclude;
+  pointer-events:none;
 }
 
 @keyframes moveGradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+  0%   { background-position:0% 50%; }
+  50%  { background-position:100% 50%; }
+  100% { background-position:0% 50%; }
 }
-
-/* ========== Habilidades ========== */
-.skill-button {
-    cursor: pointer;
-    padding: 1rem;
-    border-radius: 0.75rem;
-    background: rgba(255,255,255,0.04);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
+.skill-progress {
+  width:100%;
+  height:4px;
+  background:#374151;
+  border-radius:2px;
+  overflow:hidden;
 }
+.skill-fill { height:100%; }
 
-.skill-button i {
-    font-size: 1.75rem;
-    line-height: 1;
-}
-
-.skill-button:hover {
-    transform: scale(1.06);
-    box-shadow: 0 0 20px rgba(227, 79, 38, 0.5); /* Java color as default glow */
-}
-
-/* ========== Proyectos ========== */
-.carousel-inner {
-    animation: scrollRight 20s linear infinite;
-    transition: transform 0.25s ease;
-}
-
-@keyframes scrollRight {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
-
+/* ==================================================
+   PROJECT CARD
+   ================================================== */
 .project-card {
-    position: relative;
-    background: #111;
-    border-radius: 15px;
-    overflow: hidden;
-    width: 160px;
-    height: 200px;
-    box-shadow: 0 0 15px rgba(251, 133, 0, 0.2);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  position:relative;
+  background:var(--bg-primary);
+  border-radius:15px;
+  width:160px;
+  height:200px;
+  padding:12px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  box-shadow:0 0 15px rgba(251,133,0,.2);
+  transition:transform .4s ease, box-shadow .4s ease;
+  overflow:hidden;
 }
-
 .project-card:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 25px rgba(255, 183, 3, 0.5);
+  transform:scale(1.08);
+  box-shadow:0 0 25px rgba(255,183,3,.5);
+}
+.project-card .overlay {
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  color:#fff;
+  opacity:0;
+  transition:opacity .3s ease;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:1rem;
+}
+.project-card:hover .overlay { opacity:1; }
+
+/* ==================================================
+   CAROUSEL (scroll‑able + auto‑scroll)
+   ================================================== */
+.carousel {
+  overflow-x:auto;
+  scroll-behavior:smooth;
+  -ms-overflow-style:none;
+  scrollbar-width:none;
+}
+.carousel::-webkit-scrollbar { display:none; }
+.carousel-inner { animation: scrollRight 20s linear infinite; }
+@keyframes scrollRight {
+  0%   { transform:translateX(0); }
+  100% { transform:translateX(-50%); }
 }
 
-.project-card h3 {
-    font-size: 0.9rem;
-    margin-bottom: 4px;
+/* ==================================================
+   TIMELINE
+   ================================================== */
+.timeline-item {
+  position:relative;
+  margin-bottom:2rem;
+}
+.timeline-item::before {
+  content:"";
+  position:absolute;
+  left:-1.5rem; top:.2rem;
+  width:.75rem; height:.75rem;
+  background:var(--color-blue);
+  border-radius:9999px;
+}
+#timeline-container::before {
+  content:"";
+  position:absolute;
+  left:-1.125rem; top:0; bottom:0;
+  width:2px;
+  background:#4b5563;
 }
 
-.project-card p {
-    font-size: 0.7rem;
-    line-height: 1.3;
-    flex-grow: 1;
+/* ==================================================
+   BACK‑TO‑TOP
+   ================================================== */
+#back-to-top { background:var(--color-primary); }
+
+/* ==================================================
+   TOAST
+   ================================================== */
+#toast.show { animation:toastIn .3s ease-out both; }
+@keyframes toastIn {
+  from { opacity:0; transform:translateY(20px); }
+  to   { opacity:1; transform:translateY(0); }
 }
 
-.project-card .stars {
-    font-size: 0.7rem;
-    display: flex;
-    align-items: center;
-    gap: 4px;
+/* ==================================================
+   REDUCED MOTION
+   ================================================== */
+@media (prefers-reduced-motion: reduce) {
+  #hero .bg-gradient-to-br,
+  .skill-button::before,
+  .carousel-inner,
+  .animate-reveal,
+  #typewriter { animation:none !important; transition:none !important; }
+}
+
+/* ==================================================
+   FOCUS VISIBLE (accesibilidad)
+   ================================================== */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline:2px solid transparent;
+  outline-offset:2px;
+  box-shadow:0 0 0 3px rgba(59,130,246,.5);
 }
