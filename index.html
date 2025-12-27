@@ -1,99 +1,246 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="DanielH131COL - Desarrollador de Software | Java, Kotlin, Unity, Bots de Discord | Colombia"/>
-  <meta name="keywords" content="desarrollador, software, java, kotlin, unity, discord bot, minecraft, colombia, portafolio"/>
-  <meta name="author" content="DanielH131COL"/>
+  <!-- ==== METADATOS ==== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description"
+        content="DanielH131COL - Desarrollador de Software | Java, Kotlin, Unity, Bots de Discord | Colombia">
+  <meta name="keywords"
+        content="desarrollador, software, java, kotlin, unity, discord bot, minecraft, colombia, portafolio">
+  <meta name="author" content="DanielH131COL">
+  <meta property="og:title" content="DanielH131COL - Software Developer &amp; Tech Enthusiast">
+  <meta property="og:description"
+        content="Desarrollador apasionado por Java, Unity y bots. Explora mis proyectos y contáctame.">
+  <meta property="og:image"
+        content="https://danielh131col.github.io/MyWebSite/assets/og-image.jpg">
+  <meta property="og:url" content="https://danielh131col.github.io/MyWebSite/">
+  <meta property="og:type" content="website">
+  <title>DanielH131COL – Software Developer &amp; Tech Enthusiast</title>
 
-  <!-- Open Graph / Social Sharing -->
-  <meta property="og:title" content="DanielH131COL - Software Developer & Tech Enthusiast"/>
-  <meta property="og:description" content="Desarrollador apasionado por Java, Unity y bots. Explora mis proyectos y contáctame."/>
-  <meta property="og:image" content="https://danielh131col.github.io/MyWebSite/assets/og-image.jpg"/>
-  <meta property="og,url" content="https://danielh131col.github.io/MyWebSite/"/>
-  <meta property="og:type" content="website"/>
+  <!-- ==== PRE‑CONNECT && CDN ==== -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
 
-  <title>DanielH131COL - Software Developer & Tech Enthusiast</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { fontFamily:{ sans:['Inter','system-ui','-apple-system','Segoe UI','Roboto','Helvetica Neue','Arial'] } } }
+    };
+  </script>
 
-  <!-- Tailwind CDN -->
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
-  <!-- EmailJS (para envío real de mensajes) -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <!-- CSS personalizado -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.0/tsparticles.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
   <link rel="stylesheet" href="css/style.css">
-</head>
-<body class="transition-colors duration-300" data-theme="dark">
 
-  <!-- Header -->
-  <header class="bg-gray-800 text-gray-100 py-4 shadow-lg animate-fadeInDown">
-    <div class="container mx-auto px-4 flex justify-between items-center">
-      <h1 class="text-2xl font-bold"><i class="fas fa-code mr-2 text-gray-400"></i>DanielH131COL</h1>
-      <div class="flex space-x-3">
-        <button id="theme-toggle" class="bg-gray-700 hover:bg-gray-600 p-3 rounded-full transition" aria-label="Cambiar tema claro/oscuro">
-          <i id="theme-icon" class="fas fa-sun text-lg"></i>
+  <!-- JSON‑LD (SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"DanielH131COL",
+    "url":"https://danielh131col.github.io/MyWebSite/",
+    "sameAs":["https://github.com/DanielH131COL","https://discord.com/users/danielh131col2"],
+    "jobTitle":"Software Developer",
+    "description":"Desarrollador especializado en Java, Kotlin, Unity y bots de Discord."
+  }
+  </script>
+</head>
+
+<body class="bg-primary text-primary transition-colors duration-300" data-theme="dark">
+
+  <!-- Partículas de fondo -->
+  <canvas id="particles-canvas" class="fixed inset-0 -z-10"></canvas>
+
+  <!-- ==== HEADER (sticky + shrink) ==== -->
+  <header id="site-header"
+          class="fixed inset-x-0 top-0 z-40 bg-gray-800 bg-opacity-90 backdrop-blur-sm shadow transition-all duration-300">
+    <div class="container mx-auto px-4 flex items-center justify-between h-20">
+      <a href="#hero" class="text-2xl font-bold flex items-center">
+        <i class="fas fa-code mr-2 text-gray-400"></i>DanielH131COL
+      </a>
+
+      <!-- Navegación (solo desktop) -->
+      <nav class="hidden md:flex space-x-6">
+        <a href="#about"    class="nav-link text-gray-100 hover:text-blue-400">Sobre mí</a>
+        <a href="#skills"   class="nav-link text-gray-100 hover:text-blue-400">Habilidades</a>
+        <a href="#timeline" class="nav-link text-gray-100 hover:text-blue-400">Trayectoria</a>
+        <a href="#projects" class="nav-link text-gray-100 hover:text-blue-400">Proyectos</a>
+        <button id="contact-btn-desktop" type="button"
+                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
+          <i class="fas fa-envelope mr-1"></i>Contacto
         </button>
-        <button id="play-sound" class="bg-gray-700 hover:bg-gray-600 p-3 rounded-full transition" aria-label="Reproducir música de fondo">
-          <i class="fas fa-play text-lg"></i>
+      </nav>
+
+      <!-- Utilidades -->
+      <div class="flex items-center space-x-3">
+        <button id="theme-toggle" type="button"
+                class="bg-gray-700 hover:bg-gray-600 p-2 rounded-full focus-visible:ring-2 focus-visible:ring-blue-400"
+                aria-label="Cambiar tema" aria-pressed="false">
+          <i id="theme-icon" class="fas fa-sun text-lg text-gray-100"></i>
+        </button>
+        <button id="play-sound" type="button"
+                class="bg-gray-700 hover:bg-gray-600 p-2 rounded-full focus-visible:ring-2 focus-visible:ring-blue-400"
+                aria-label="Reproducir música">
+          <i class="fas fa-play text-lg text-gray-100"></i>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Audios -->
-  <audio id="background-sound" src="assets/sounds/background.mp3" loop preload="none"></audio>
-  <audio id="click-sound" src="assets/sounds/click.mp3" preload="auto"></audio>
-
-  <!-- Sobre mí -->
-  <section class="container mx-auto px-4 py-8 bg-gray-800 rounded-lg shadow-md mt-6 animate-slideInLeft">
-    <h2 class="text-3xl font-semibold mb-4"><i class="fas fa-user mr-2 text-gray-400"></i>Sobre mí</h2>
-    <p class="text-lg leading-relaxed" id="about-text"></p>
-  </section>
-
-  <!-- Habilidades -->
-  <section class="container mx-auto px-4 py-8 bg-gray-800 rounded-lg shadow-md mt-6 animate-zoomIn">
-    <h2 class="text-3xl font-semibold mb-6"><i class="fas fa-tools mr-2 text-gray-400"></i>Habilidades</h2>
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6" id="skills-container" role="list" aria-label="Habilidades técnicas"></div>
-  </section>
-
-  <!-- Proyectos -->
-  <section class="container mx-auto px-4 py-8 bg-gray-800 rounded-lg shadow-md mt-6 animate-slideInRight">
-    <h2 class="text-3xl font-semibold mb-6"><i class="fas fa-project-diagram mr-2 text-gray-400"></i>Proyectos Destacados</h2>
-    <div class="carousel relative overflow-hidden bg-gray-900 rounded-lg shadow-inner p-4">
-      <div class="carousel-inner flex gap-4 will-change-transform" id="carousel-inner" role="region" aria-label="Carrusel de proyectos"></div>
+  <!-- ==== HERO ==== -->
+  <section id="hero"
+           class="min-h-screen flex items-center justify-center text-center text-white relative pt-20">
+    <div class="absolute inset-0 bg-gradient-to-br opacity-70"></div>
+    <div class="relative z-10 max-w-2xl px-4">
+      <h1 class="text-5xl md:text-6xl font-bold mb-6 drop-shadow-md">¡Hola!</h1>
+      <h2 class="text-2xl md:text-3xl mb-8 drop-shadow-md">
+        <span id="typewriter" class="border-r-2 border-white pr-1"></span>
+      </h2>
+      <a href="#contact-btn"
+         class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-full transition shadow-lg hover:shadow-xl">
+        <i class="fas fa-envelope mr-1"></i>¡Hablemos!
+      </a>
     </div>
   </section>
 
-  <!-- Botón de contacto -->
-  <button id="contact-btn" class="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full shadow-2xl z-50 transition-all hover:scale-110 focus:outline-none focus:ring-4 focus:ring-blue-400" aria-label="Abrir formulario de contacto">
+  <!-- ==== SECCIONES ==== -->
+  <section id="about"
+           class="container mx-auto px-4 py-16 bg-gray-800 rounded-lg shadow-md mt-12 animate-reveal">
+    <h2 class="text-4xl font-semibold mb-6 text-gray-100 flex items-center">
+      <i class="fas fa-user mr-3 text-gray-400"></i>Sobre mí
+    </h2>
+    <p id="about-text" class="text-lg text-gray-300 leading-relaxed"></p>
+  </section>
+
+  <section id="skills"
+           class="container mx-auto px-4 py-16 bg-gray-800 rounded-lg shadow-md mt-12 animate-reveal">
+    <h2 class="text-4xl font-semibold mb-8 text-gray-100 flex items-center">
+      <i class="fas fa-tools mr-3 text-gray-400"></i>Habilidades
+    </h2>
+    <ul id="skills-container"
+        class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6"
+        role="list"
+        aria-label="Listado de habilidades técnicas">
+      <!-- JS injecta tarjetas -->
+    </ul>
+  </section>
+
+  <section id="timeline"
+           class="container mx-auto px-4 py-16 bg-gray-800 rounded-lg shadow-md mt-12 animate-reveal">
+    <h2 class="text-4xl font-semibold mb-8 text-gray-100 flex items-center">
+      <i class="fas fa-calendar-alt mr-3 text-gray-400"></i>Trayectoria
+    </h2>
+    <div id="timeline-container" class="relative pl-8">
+      <!-- JS genera los items -->
+    </div>
+  </section>
+
+  <section id="projects"
+           class="container mx-auto px-4 py-16 bg-gray-800 rounded-lg shadow-md mt-12 animate-reveal">
+    <h2 class="text-4xl font-semibold mb-8 text-gray-100 flex items-center">
+      <i class="fas fa-project-diagram mr-3 text-gray-400"></i>Proyectos destacados
+    </h2>
+
+    <div class="relative">
+      <button id="carousel-prev"
+              class="absolute left-0 top-1/2 -translate-y-1/2 bg-gray-700 hover:bg-gray-600 text-gray-100 p-2 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+
+      <div class="carousel overflow-x-auto scrollbar-none rounded-lg shadow-inner bg-gray-900 p-4">
+        <div id="carousel-inner" class="flex gap-4"></div>
+      </div>
+
+      <button id="carousel-next"
+              class="absolute right-0 top-1/2 -translate-y-1/2 bg-gray-700 hover:bg-gray-600 text-gray-100 p-2 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </section>
+
+  <!-- ==== BOTONES ==== -->
+  <button id="contact-btn"
+          class="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full shadow-2xl z-50 transition-all hover:scale-110 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-400"
+          aria-label="Abrir formulario">
     <i class="fas fa-envelope mr-2"></i>Contacto
   </button>
 
-  <!-- Modal de contacto -->
-  <div id="contact-modal" class="fixed inset-0 hidden items-center justify-center z-50 contact-glow" role="dialog" aria-modal="true" aria-labelledby="contact-title">
+  <button id="back-to-top"
+          class="fixed bottom-6 right-6 hidden bg-primary hover:bg-primary-dark text-white p-3 rounded-full shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+          aria-label="Volver al inicio">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <div id="toast"
+       class="hidden fixed inset-x-0 bottom-4 mx-auto max-w-xs z-50 bg-gray-800 text-white py-3 px-5 rounded-lg shadow-xl flex items-center gap-2"
+       role="status"
+       aria-live="polite">
+    <i class="fas fa-info-circle"></i><span id="toast-msg"></span>
+  </div>
+
+  <!-- ==== MODAL DE CONTACTO ==== -->
+  <div id="contact-modal"
+       class="fixed inset-0 hidden items-center justify-center z-50 contact-glow"
+       role="dialog"
+       aria-modal="true"
+       aria-labelledby="contact-title">
     <div class="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm" aria-hidden="true"></div>
     <div class="relative z-10 bg-gray-800 p-8 rounded-xl shadow-2xl max-w-md w-full mx-4 animate-zoomIn">
-      <button id="close-modal" class="absolute top-3 right-3 text-gray-400 hover:text-white text-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-full w-10 h-10" aria-label="Cerrar modal">&times;</button>
+      <button id="close-modal" type="button"
+              class="absolute top-3 right-3 text-gray-400 hover:text-white text-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-full w-10 h-10"
+              aria-label="Cerrar modal">&times;</button>
+
       <h2 id="contact-title" class="text-2xl font-bold mb-4 text-gray-100">Contáctame</h2>
-      <p class="text-sm mb-6 text-gray-400" id="discord-info"></p>
-      <form id="contact-form" class="space-y-5">
-        <input type="text" id="name" placeholder="Tu nombre" class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500" required aria-label="Nombre">
-        <input type="email" id="email" placeholder="tu@email.com" class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500" required aria-label="Email">
-        <textarea id="message" placeholder="Tu mensaje..." class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-100 h-32 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500" required aria-label="Mensaje"></textarea>
-        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition flex items-center justify-center gap-2 focus:outline-none focus:ring-4 focus:ring-blue-400">
-          <i class="fas fa-paper-plane"></i> Enviar Mensaje
+      <p id="discord-info" class="text-sm mb-6 text-gray-400"></p>
+
+      <form id="contact-form" class="space-y-5" novalidate>
+        <label for="name" class="sr-only">Nombre</label>
+        <input id="name" type="text" placeholder="Tu nombre"
+               class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+               required>
+
+        <label for="email" class="sr-only">Correo</label>
+        <input id="email" type="email" placeholder="tucorreo@ejemplo.com"
+               class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+               required>
+
+        <label for="message" class="sr-only">Mensaje</label>
+        <textarea id="message" placeholder="Tu mensaje..."
+                  class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-100 h-32 resize-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                  required></textarea>
+
+        <button type="submit"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-400">
+          <i class="fas fa-paper-plane"></i> Enviar
         </button>
       </form>
+
+      <p id="form-status" class="sr-only" role="status" aria-live="polite"></p>
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer class="bg-gray-800 text-center py-6 mt-12 shadow-lg animate-fadeIn">
-    <p id="footer-text" class="text-sm"></p>
+  <!-- ==== FOOTER ==== -->
+  <footer class="bg-gray-800 text-center py-8 mt-12 shadow-lg animate-reveal">
+    <p id="footer-text" class="text-sm text-gray-400"></p>
   </footer>
 
-  <script src="js/script.js"></script>
+  <!-- ==== AUDIOS ==== -->
+  <audio id="background-sound" src="assets/sounds/background.mp3" loop preload="none"></audio>
+  <audio id="click-sound" src="assets/sounds/click.mp3" preload="auto"></audio>
+
+  <noscript>
+    <div class="bg-yellow-200 text-yellow-900 p-4 text-center">
+      Esta página necesita JavaScript para funcionar correctamente.
+    </div>
+  </noscript>
+
+  <script src="js/script.js" defer></script>
 </body>
 </html>
