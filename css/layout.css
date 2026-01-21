@@ -1,0 +1,39 @@
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  background: linear-gradient(rgba(5,5,15,0.92), rgba(5,5,15,0.96)),
+              url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1920') center/cover fixed;
+}
+
+.hero-grid-bg {
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(rgba(0,246,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,246,255,.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.hero-content {
+  text-align: center;
+  z-index: 2;
+}
+
+.hero-role {
+  font-size: 1.6rem;
+  color: var(--neon);
+  letter-spacing: 4px;
+  margin: 1.5rem 0 2.5rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.hero-cta {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2.5rem;
+}

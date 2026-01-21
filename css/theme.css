@@ -1,0 +1,22 @@
+:root {
+  --bg: #080000;                    /* Negro casi absoluto, más elegante */
+  --bg-card: rgba(40, 0, 0, 0.60);  /* Glassmorphism más sutil */
+  --neon-main: #ff1a1a;             /* Rojo principal intenso */
+  --neon-secondary: #ff5500;        /* Anaranjado más vibrante pero no cegador */
+  --text: #ffffff;                  /* Blanco puro */
+  --text-muted: #d0d0d0;            /* Gris suave para descripciones */
+  --gradient: linear-gradient(135deg, #ff1a1a 0%, #ff5500 50%, #ffaa00 100%);
+  --glow-main: 0 0 20px rgba(255, 26, 26, 0.65);
+  --glow-secondary: 0 0 25px rgba(255, 85, 0, 0.55);
+}
+
+[data-theme="light"] {
+  --bg: #140000;                    /* Rojo muy oscuro como "modo claro" */
+  --bg-card: rgba(50, 10, 10, 0.70);
+  --neon-main: #ff3333;
+  --neon-secondary: #ff7733;
+  --text: #ffffff;
+  --text-muted: #e0e0e0;
+  --glow-main: 0 0 18px rgba(255, 51, 51, 0.5);
+  --glow-secondary: 0 0 22px rgba(255, 119, 51, 0.45);
+}
