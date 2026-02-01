@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Daniel Developer & Freelancer</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+
+<div id="projectModal" class="modal-overlay">
+  <div class="modal-content" id="modalContent">
+    <h2>🚀 Proyecto más reciente</h2>
+    <div id="latestProjectCard" class="project-card loading">
+      Cargando proyecto...
+    </div>
+  </div>
+</div>
+
+<div class="language-switcher">
+  <button class="lang-btn active" data-lang="es">ES</button>
+  <button class="lang-btn" data-lang="en">EN</button>
+</div>
+
+<header class="hero">
+  <div class="container">
+    <h1>
+      <span class="greeting" data-i18n="hero-greeting">Hola, soy </span>
+      <span class="typing"></span>
+    </h1>
+    <p class="subtitle" data-i18n="hero-subtitle">Developer & Freelancer</p>
+    <div class="social-links">
+      <a href="https://github.com/DanielH131COL" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://discord.com/users/danielh131col2" target="_blank"><i class="fab fa-discord"></i></a>
+    </div>
+    <a href="#projects" class="btn"><span data-i18n="btn-projects">Ver Proyectos</span></a>
+  </div>
+</header>
+
+<!-- About -->
+<section id="about" class="section">
+  <div class="container" data-aos="fade-up">
+    <h2 data-i18n="about-title">Sobre Mí</h2>
+    <p data-i18n="about-p1">👋 ¡Hey! Soy un desarrollador apasionado por la tecnología y el desarrollo de videojuegos. Me encanta crear herramientas útiles, sistemas divertidos y experimentar con código creativo.</p>
+    <p data-i18n="about-p2">Actualmente enfocado en Java, PHP y proyectos indie de gaming. Siempre abierto a colaborar o charlar sobre tech.</p>
+    <p class="location"><i class="fas fa-map-marker-alt"></i> Colombia</p>
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills" class="section skills-section">
+  <div class="container" data-aos="fade-up">
+    <h2 data-i18n="skills-title">Habilidades</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <i class="fab fa-java"></i>
+        <h3 data-i18n="skill-java-title">Java</h3>
+        <p data-i18n="skill-java-desc">Core, proxies, juegos, Minecraft plugins</p>
+      </div>
+      <div class="skill-card">
+        <i class="fab fa-php"></i>
+        <h3 data-i18n="skill-php-title">PHP</h3>
+        <p data-i18n="skill-php-desc">Sistemas de licencias, backends web</p>
+      </div>
+      <div class="skill-card">
+        <i class="fas fa-gamepad"></i>
+        <h3 data-i18n="skill-gamedev-title">Game Dev</h3>
+        <p data-i18n="skill-gamedev-desc">Prototipos y juegos pequeños</p>
+      </div>
+      <div class="skill-card">
+        <i class="fas fa-tools"></i>
+        <h3 data-i18n="skill-other-title">Otras</h3>
+        <p data-i18n="skill-other-desc">Git, MySQL, HTML/CSS/JS básico</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects" class="section">
+  <div class="container" data-aos="fade-up">
+    <h2 data-i18n="projects-title">Mis Proyectos Destacados</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <h3>Bunetix</h3>
+        <p data-i18n="proj-bunetix-desc">Totally free Proxy Core desarrollado en Java.</p>
+        <a href="https://github.com/DanielH131COL/Bunetix" target="_blank" class="btn-small"><span data-i18n="proj-btn">Ver en GitHub</span></a>
+      </div>
+      <div class="project-card">
+        <h3>StellarLicense</h3>
+        <p data-i18n="proj-stellar-desc">Sistema de licencias para plugins Minecraft o cualquier uso (PHP).</p>
+        <a href="https://github.com/DanielH131COL/StellarLicense" target="_blank" class="btn-small"><span data-i18n="proj-btn">Ver en GitHub</span></a>
+      </div>
+      <div class="project-card">
+        <h3>FreeRank</h3>
+        <p data-i18n="proj-freerank-desc">Sistema simple de freerank, fácil y directo (Java).</p>
+        <a href="https://github.com/DanielH131COL/FreeRank" target="_blank" class="btn-small"><span data-i18n="proj-btn">Ver en GitHub</span></a>
+      </div>
+      <div class="project-card">
+        <h3>Game</h3>
+        <p data-i18n="proj-game-desc">Mi primer juego inspirado en temas de aim (Java).</p>
+        <a href="https://github.com/DanielH131COL/Game" target="_blank" class="btn-small"><span data-i18n="proj-btn">Ver en GitHub</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="section contact-section">
+  <div class="container" data-aos="fade-up">
+    <h2 data-i18n="contact-title">Contacto</h2>
+    <p data-i18n="contact-p1">¿Quieres charlar, colaborar o preguntarme algo?</p>
+    <p data-i18n="contact-p2">Encuéntrame en Discord: <strong>danielh131col2</strong></p>
+    <a href="https://discord.com/users/danielh131col2" target="_blank" class="btn"><span data-i18n="contact-btn">¡Hablemos!</span> <i class="fab fa-discord"></i></a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 DanielH131COL</p>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({duration:1000,once:true});
+</script>
+<script src="script.js"></script>
+</body>
+</html>

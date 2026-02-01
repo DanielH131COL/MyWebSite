@@ -1,0 +1,252 @@
+:root{
+  --primary:#ff4500;
+  --secondary:#ffae42;
+  --bg1:#1a0000;
+  --bg2:#b22222;
+  --bg3:#ff8c00;
+  --text:#f5f5f5;
+  --overlay-dark:rgba(26,0,0,.8);
+  --overlay-light:rgba(255,69,0,.6);
+}
+
+/* -----------   Reset   ----------- */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+/* -----------   Global   ----------- */
+body{
+  font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+  background:linear-gradient(135deg,var(--bg1)0%,var(--bg2)50%,var(--bg3)100%);
+  color:var(--text);
+  line-height:1.6;
+  min-height:100vh;
+}
+.container{
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 20px;
+}
+h1,h2,h3{color:var(--secondary);}
+
+/* -----------   Hero   ----------- */
+.hero{
+  height:100vh;
+  min-height:700px;
+  display:flex;
+  align-items:center;
+  text-align:center;
+  background:linear-gradient(var(--overlay-dark),var(--overlay-light)),
+            url('https://source.unsplash.com/random/1920x1080?code,tech') center/cover;
+  background-attachment:fixed;
+}
+.hero h1{font-size:4.5rem;margin-bottom:1rem;}
+.hero .typing{
+  color:var(--primary);
+  font-weight:bold;
+}
+
+/* -----------   Subtitle & Social   ----------- */
+.subtitle{font-size:1.6rem;margin:1.5rem 0 2rem;opacity:.9;}
+.social-links a{
+  color:white;
+  font-size:2.2rem;
+  margin:0 15px;
+  transition:.3s;
+}
+.social-links a:hover{
+  color:var(--primary);
+  transform:translateY(-5px);
+}
+
+/* -----------   Buttons   ----------- */
+.btn{
+  display:inline-block;
+  background:var(--primary);
+  color:white;
+  padding:14px 32px;
+  border-radius:50px;
+  text-decoration:none;
+  font-weight:bold;
+  margin-top:1.5rem;
+  transition:all .3s;
+}
+.btn:hover{
+  background:var(--secondary);
+  transform:translateY(-3px);
+  box-shadow:0 10px 25px rgba(255,174,66,.4);
+}
+.btn-small{
+  display:inline-block;
+  background:var(--primary);
+  color:white;
+  padding:10px 20px;
+  border-radius:30px;
+  text-decoration:none;
+  font-size:.95rem;
+  margin-top:1rem;
+  transition:.3s;
+}
+.btn-small:hover{background:var(--secondary);}
+
+/* -----------   Sections   ----------- */
+.section{
+  padding:100px 0;
+}
+.section h2{
+  text-align:center;
+  font-size:3rem;
+  margin-bottom:3rem;
+  position:relative;
+}
+.section h2::after{
+  content:'';
+  width:80px;
+  height:4px;
+  background:var(--primary);
+  position:absolute;
+  bottom:-15px;
+  left:50%;
+  transform:translateX(-50%);
+  border-radius:2px;
+}
+
+/* -----------   Grids   ----------- */
+.skills-grid,.projects-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:30px;
+}
+
+/* -----------   Cards   ----------- */
+.skill-card,.project-card{
+  background:rgba(255,255,255,.05);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,69,0,.2);
+  border-radius:16px;
+  padding:30px 20px;
+  text-align:center;
+  transition:all .4s;
+}
+.skill-card:hover,.project-card:hover{
+  transform:translateY(-15px);
+  border-color:var(--primary);
+  box-shadow:0 20px 40px rgba(0,0,0,.3);
+}
+.skill-card i{
+  font-size:3.5rem;
+  color:var(--primary);
+  margin-bottom:1rem;
+}
+
+/* -----------   Contact   ----------- */
+.contact-section{text-align:center;}
+.contact-section p{font-size:1.3rem;margin:1.5rem 0;}
+
+/* -----------   Footer   ----------- */
+footer{
+  text-align:center;
+  padding:40px 0;
+  background:rgba(0,0,0,.3);
+  font-size:.95rem;
+  opacity:.8;
+}
+
+/* -----------   Language Switcher   ----------- */
+.language-switcher{
+  position:fixed;
+  top:1rem;
+  right:1rem;
+  display:flex;
+  gap:.4rem;
+  z-index:1000;
+}
+.lang-btn{
+  background:rgba(255,255,255,.1);
+  color:#e0e0ff;
+  border:1px solid var(--primary);
+  border-radius:.3rem;
+  padding:.4rem .8rem;
+  font-size:.9rem;
+  cursor:pointer;
+  transition:.3s;
+}
+.lang-btn.active,.lang-btn:hover{
+  background:var(--primary);
+  color:#fff;
+}
+
+/* -----------   Responsive   ----------- */
+@media (max-width:768px){
+  .hero h1{font-size:3.2rem;}
+  .section{padding:70px 0;}
+}
+
+/* Overlay con blur */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Contenido del modal */
+.modal-content {
+  background: #121212;
+  border-radius: 18px;
+  padding: 30px;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  border: 2px solid #f5a623;
+  animation: slideUp 0.35s ease;
+}
+
+.modal-content h2 {
+  margin-bottom: 20px;
+}
+
+.modal-overlay.hidden {
+  display: none;
+}
+
+.loading {
+  opacity: 0.6;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0 }
+  to { opacity: 1 }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0 }
+  to { transform: translateY(0); opacity: 1 }
+}
+
+.commit-info {
+  margin-top: 15px;
+  padding: 12px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+.commit-info p {
+  margin: 6px 0;
+  opacity: 0.9;
+}
+
+.commit-author {
+  font-weight: bold;
+  color: #f5a623;
+}
