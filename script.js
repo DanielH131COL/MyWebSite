@@ -1,7 +1,7 @@
-const githubUser = "DanielH131COL";
-const modal = document.getElementById("projectModal");
+const githubUser   = "DanielH131COL";
+const modal        = document.getElementById("projectModal");
 const modalContent = document.getElementById("modalContent");
-const container = document.getElementById("latestProjectCard");
+const projectCard  = document.getElementById("latestProjectCard");
 
 const translations = {
   es: {
@@ -29,7 +29,8 @@ const translations = {
     "contact-title": "Contacto",
     "contact-p1": "¿Quieres charlar, colaborar o preguntarme algo?",
     "contact-p2": "Encuéntrame en Discord: <strong>danielh131col2</strong>",
-    "contact-btn": "¡Hablemos!"
+    "contact-btn": "¡Hablemos!",
+    "visit-label": "Visitas:"
   },
   en: {
     "hero-greeting": "Hi, I'm ",
@@ -56,92 +57,119 @@ const translations = {
     "contact-title": "Contact",
     "contact-p1": "Want to chat, collaborate or ask me something?",
     "contact-p2": "Find me on Discord: <strong>danielh131col2</strong>",
-    "contact-btn": "Let's talk!"
+    "contact-btn": "Let's talk!",
+    "visit-label": "Visits:"
   }
 };
 
-/* ---- Apply translation ---- */
-function applyTranslations(lang){
+function applyTranslations(lang) {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.dataset.i18n;
-    if (translations[lang][key]) el.innerHTML = translations[lang][key];
+    if (translations[lang] && translations[lang][key]) {
+      el.innerHTML = translations[lang][key];
+    }
   });
 }
 
-/* ---- Language switcher ---- */
-function setLanguage(lang){
-  document.documentElement.lang = lang;
-  localStorage.setItem('lang',lang);
-  document.querySelectorAll('.lang-btn')
-          .forEach(b => b.classList.toggle('active', b.dataset.lang===lang));
-  applyTranslations(lang);
+const typingEl   = document.querySelector('.typing');
+const fullName   = "DanielH131COL";
+let typeIndex   = 0;
+
+function resetTyping() {
+  typingEl.textContent = "";
+  typeIndex = 0;
 }
-document.querySelectorAll('.lang-btn')
-        .forEach(b => b.addEventListener('click',()=>setLanguage(b.dataset.lang)));
-
-/* ---- Init language on load ---- */
-const storedLang = localStorage.getItem('lang') || document.documentElement.lang || 'es';
-setLanguage(storedLang);
-
-/* ---- Typewriter animation ---- */
-const typingEl = document.querySelector('.typing');
-const name = "DanielH131COL";
-let i = 0;
-function typeWriter(){
-  if (i < name.length){
-    typingEl.textContent += name.charAt(i);
-    i++;
-    setTimeout(typeWriter,150);
+function typeWriter() {
+  if (typeIndex < fullName.length) {
+    typingEl.textContent += fullName.charAt(typeIndex);
+    typeIndex++;
+    setTimeout(typeWriter, 150);
   }
 }
 
-fetch(`https://api.github.com/users/${githubUser}/repos?sort=updated`)
-  .then(res => res.json())
-  .then(repos => {
-    if (!repos || repos.length === 0) {
-      container.innerHTML = "No hay repositorios públicos.";
-      return;
-    }
+function setLanguage(lang, restartTyping = true) {
+  document.documentElement.lang = lang;
+  localStorage.setItem('lang', lang);
+  document.querySelectorAll('.lang-btn')
+          .forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+  applyTranslations(lang);
+  if (restartTyping) {
+    resetTyping();
+    setTimeout(typeWriter, 200);
+  }
+}
 
-    const repo = repos[0];
+const storedLang = localStorage.getItem('lang') || document.documentElement.lang || 'es';
+setLanguage(storedLang, false);
 
-    // 2️⃣ Obtener último commit del repo
-    fetch(`https://api.github.com/repos/${githubUser}/${repo.name}/commits?per_page=1`)
-      .then(res => res.json())
-      .then(commits => {
-        const commit = commits[0];
-        const message = commit.commit.message;
-        const author = commit.commit.author.name;
-        const date = new Date(commit.commit.author.date).toLocaleString();
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+});
 
-        container.classList.remove("loading");
-        container.innerHTML = `
-          <h3>${repo.name}</h3>
-          <p>${repo.description || "Sin descripción"}</p>
+function loadLatestRepo() {
+  fetch(`https://api.github.com/users/${githubUser}/repos?sort=updated`)
+    .then(res => res.json())
+    .then(repos => {
+      if (!Array.isArray(repos) || repos.length === 0) {
+        projectCard.innerHTML = "No hay repositorios públicos.";
+        return;
+      }
+      const repo = repos[0];
+      fetch(`https://api.github.com/repos/${githubUser}/${repo.name}/commits?per_page=1`)
+        .then(res => res.json())
+        .then(commits => {
+          const commit = commits[0];
+          const message = commit?.commit?.message ?? "";
+          const author  = commit?.commit?.author?.name ?? "";
+          const date    = commit?.commit?.author?.date ?
+                         new Date(commit.commit.author.date).toLocaleString() : "";
+          projectCard.classList.remove('loading');
+          projectCard.innerHTML = `
+            <h3>${repo.name}</h3>
+            <p>${repo.description || "Sin descripción"}</p>
+            <div class="commit-info">
+              <p>📝 <strong>Último commit:</strong></p>
+              <p>"${message}"</p>
+              <p class="commit-author">👤 ${author}</p>
+              <p>🕒 ${date}</p>
+            </div>
+            <a href="${repo.html_url}" target="_blank" class="btn-small">
+              Ver en GitHub
+            </a>
+          `;
+        })
+        .catch(() => {
+          projectCard.innerHTML = "Error al cargar el último commit.";
+        });
+    })
+    .catch(() => {
+      projectCard.innerHTML = "Error al cargar los repositorios.";
+    });
+}
 
-          <div class="commit-info">
-            <p>📝 <strong>Último commit:</strong></p>
-            <p>"${message}"</p>
-            <p class="commit-author">👤 ${author}</p>
-            <p>🕒 ${date}</p>
-          </div>
-
-          <a href="${repo.html_url}" target="_blank" class="btn-small">
-            Ver en GitHub
-          </a>
-        `;
-      });
-  })
-  .catch(() => {
-    container.innerHTML = "Error al cargar información de GitHub.";
-  });
-
-modal.addEventListener("click", (e) => {
+modal.addEventListener('click', e => {
   if (!modalContent.contains(e.target)) {
-    modal.classList.add("hidden");
+    modal.classList.add('hidden');
   }
 });
 
-window.addEventListener('load',()=>
-    modal.classList.remove("hidden"),
-    setTimeout(typeWriter,500));
+function updateVisitCount() {
+  const counterEl = document.getElementById('visitCount');
+  fetch('https://api.countapi.xyz/hit/danielh131col/mysite')
+    .then(res => res.json())
+    .then(data => {
+      counterEl.textContent = data.value;
+    })
+    .catch(() => {
+      const local = (parseInt(localStorage.getItem('visitCount') || '0', 10) || 0) + 1;
+      localStorage.setItem('visitCount', local);
+      counterEl.textContent = local;
+    });
+}
+
+window.addEventListener('load', () => {
+  modal.classList.remove('hidden');
+  loadLatestRepo();
+  updateVisitCount();
+  setTimeout(typeWriter, 500);
+});

@@ -5,12 +5,19 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Daniel Developer & Freelancer</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
 
-<div id="projectModal" class="modal-overlay">
+<!-- Contador de visitas (esquina superior izquierda) -->
+<div class="visit-counter">
+  <span data-i18n="visit-label">Visitas:</span>
+  <span id="visitCount">0</span>
+</div>
+
+<div id="projectModal" class="modal-overlay hidden">
   <div class="modal-content" id="modalContent">
     <h2>🚀 Proyecto más reciente</h2>
     <div id="latestProjectCard" class="project-card loading">
@@ -122,9 +129,7 @@
 </footer>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-  AOS.init({duration:1000,once:true});
-</script>
+<script>AOS.init({duration:1000,once:true});</script>
 <script src="script.js"></script>
 </body>
 </html>
